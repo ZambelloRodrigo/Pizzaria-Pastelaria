@@ -1,0 +1,152 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 08-Nov-2022 às 23:11
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 7.4.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `base_triacca`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `ID_CLIENTE` int(11) NOT NULL,
+  `NM_CLIENTE` varchar(200) NOT NULL,
+  `ENDERECO` varchar(500) NOT NULL,
+  `BAIRRO` varchar(100) NOT NULL,
+  `CIDADE` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`ID_CLIENTE`, `NM_CLIENTE`, `ENDERECO`, `BAIRRO`, `CIDADE`) VALUES
+(1, 'RODRIGO', 'ASDASDASDASD', 'ASDASDAS', 'TOLEDO'),
+(2, 'SR. BOCA ABERTA', 'ALSKJDJ', 'ALKSJDLKJASD', 'ASÇLDKASK'),
+(3, 'SR. BOCA ABERTA', 'ALSKJDJ', 'ALKSJDLKJASD', 'ASÇLDKASK'),
+(4, 'SR. BOCA ABERTA', 'ALSKJDJ', 'ALKSJDLKJASD', 'ASÇLDKASK'),
+(5, 'SR. BOCA ABERTA', 'ALSKJDJ', 'ALKSJDLKJASD', 'ASÇLDKASK');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produtos`
+--
+
+CREATE TABLE `produtos` (
+  `ID_PRODUTO` int(11) NOT NULL,
+  `NM_PRODUTO` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`ID_PRODUTO`, `NM_PRODUTO`) VALUES
+(1, 'Pizza mussarela'),
+(2, 'asdasdasd'),
+(3, 'asdasdasdasdasda');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `vendas`
+--
+
+CREATE TABLE `vendas` (
+  `ID_VENDAS` int(11) NOT NULL,
+  `ID_MESA` int(11) NOT NULL,
+  `ID_PRODUTO` int(11) NOT NULL,
+  `ID_CLIENTE` int(11) NOT NULL,
+  `VL_PRODUTO` double NOT NULL,
+  `VL_TOTAL` double NOT NULL,
+  `QT_PRODUTO` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `vendas`
+--
+
+INSERT INTO `vendas` (`ID_VENDAS`, `ID_MESA`, `ID_PRODUTO`, `ID_CLIENTE`, `VL_PRODUTO`, `VL_TOTAL`, `QT_PRODUTO`) VALUES
+(1, 0, 1, 1, 58.7, 58.7, 1),
+(2, 5, 2, 3, 52, 105.98, 2);
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`ID_CLIENTE`);
+
+--
+-- Índices para tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`ID_PRODUTO`);
+
+--
+-- Índices para tabela `vendas`
+--
+ALTER TABLE `vendas`
+  ADD PRIMARY KEY (`ID_VENDAS`),
+  ADD KEY `FK_PRODUTO` (`ID_PRODUTO`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `ID_CLIENTE` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `ID_PRODUTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `vendas`
+--
+ALTER TABLE `vendas`
+  MODIFY `ID_VENDAS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `vendas`
+--
+ALTER TABLE `vendas`
+  ADD CONSTRAINT `FK_CLIENTE` FOREIGN KEY (`ID_VENDAS`) REFERENCES `cliente` (`ID_CLIENTE`),
+  ADD CONSTRAINT `FK_PRODUTO` FOREIGN KEY (`ID_PRODUTO`) REFERENCES `produtos` (`ID_PRODUTO`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

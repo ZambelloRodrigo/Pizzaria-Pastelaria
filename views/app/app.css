@@ -1,0 +1,17 @@
+.header{
+    background-color: #00B8C2;
+    height: 50px;
+}
+
+.home{
+    margin: center;
+
+}
+
+.pMensagemErro{
+    color: red;
+}
+
+.rodape{
+    background-color: #00B8C2;
+}
