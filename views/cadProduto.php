@@ -28,7 +28,7 @@ if (isset($_SESSION['salvo'])) {
                 </a>
             </div>
             <div class="col">
-                <a class="btn" href="views/cadProduto.php">Produtos</a>
+                <a class="btn" href="cadCliente.php">Clientes</a>
             </div>
         </div>
     </div>
